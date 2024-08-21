@@ -1,3 +1,5 @@
+using TuberTreats.Models.DTOs;
+
 namespace TuberTreats.Models;
 
 public class TuberOrder 

@@ -1,3 +1,5 @@
+using TuberTreats.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -19,6 +21,70 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+List<TuberDriver> drivers = new List<TuberDriver>()
+{
+    new TuberDriver()
+    {
+        Id = 1,
+        Name = "Taylor",
+        TuberDeliveries = 2
+
+    },
+      new TuberDriver()
+    {
+        Id = 1,
+        Name = "Alan",
+        TuberDeliveries = 3
+
+    },
+      new TuberDriver()
+    {
+        Id = 1,
+        Name = "Gina",
+        TuberDeliveries = 1
+
+    },
+};
+
+List <Customer> customers = new List<Customer>()
+{
+    new Customer()
+    {
+        Id = 1,
+        Name = "Bonnie",
+        Address = "35 peaceful drive",
+        TuberOrders = 3
+    },
+     new Customer()
+    {
+        Id = 2,
+        Name = "Jill",
+        Address = "123 New Street",
+        TuberOrders = 1
+    },
+     new Customer()
+    {
+        Id = 3,
+        Name = "Britney",
+        Address = "35 peaceful drive",
+        TuberOrders = 2
+    },
+     new Customer()
+    {
+        Id = 4,
+        Name = "Bonnie",
+        Address = "35 peaceful drive",
+        TuberOrders = 4
+    },
+     new Customer()
+    {
+        Id = 5,
+        Name = "Bonnie",
+        Address = "35 peaceful drive",
+        TuberOrders = 4
+    }
+};
 
 //add endpoints here
 
