@@ -1,4 +1,5 @@
 using TuberTreats.Models;
+using TuberTreats.Models.DTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,39 +55,87 @@ List <Customer> customers = new List<Customer>()
         Id = 1,
         Name = "Bonnie",
         Address = "35 peaceful drive",
-        TuberOrders = 3
     },
      new Customer()
     {
         Id = 2,
         Name = "Jill",
         Address = "123 New Street",
-        TuberOrders = 1
     },
      new Customer()
     {
         Id = 3,
         Name = "Britney",
         Address = "35 peaceful drive",
-        TuberOrders = 2
     },
      new Customer()
     {
         Id = 4,
         Name = "Bonnie",
         Address = "35 peaceful drive",
-        TuberOrders = 4
     },
      new Customer()
     {
         Id = 5,
         Name = "Bonnie",
         Address = "35 peaceful drive",
-        TuberOrders = 4
     }
 };
 
+List <Topping> toppings = new List<Topping>()
+{
+    new Topping()
+    {
+        Id = 1,
+        Name = "Butter"
+    },
+        new Topping()
+    {
+        Id = 2,
+        Name = "Chives"
+    },
+        new Topping()
+    {
+        Id = 3,
+        Name = "Cheese"
+    },
+        new Topping()
+    {
+        Id = 4,
+        Name = "Bacon"
+    },
+        new Topping()
+    {
+        Id = 5,
+        Name = "Sour Cream"
+    }
+};
+
+List <TuberOrder> tuberOrders = new List<TuberOrder>()
+{
+    new TuberOrder()
+    {
+        Id = 1,
+        
+
+    }
+
+}
 //add endpoints here
+app.MapGet("/api/tuberorders", () =>
+{
+    return Results.Ok(
+        orders.Select(o => new TuberOrderDTO()
+        {
+            Id = d.Id,
+            Name = d.Name,
+            CityId = d.CityId,
+            WalkerId = d.WalkerId
+        })
+        .ToList()
+    );
+
+});
 
 app.Run();
 //don't touch or move this!

@@ -8,5 +8,5 @@ public class Customer
 
     public string Address { get; set; }
 
-    public int TuberOrders {get; set; }
+    public List<TuberOrder> TuberOrders {get; set; }
 }

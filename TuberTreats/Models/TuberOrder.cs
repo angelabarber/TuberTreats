@@ -10,7 +10,7 @@ public class TuberOrder
 
     public int CustomerId { get; set; }
 
-    public int TuberDriverId {get; set; }
+    public int? TuberDriverId {get; set; }
 
     public DateTime DeliveredOn { get; set;}
 
