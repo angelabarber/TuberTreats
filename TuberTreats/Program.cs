@@ -217,6 +217,34 @@ app.MapPost("/api/tuberorders", (TuberOrderDTO newOrderDTO) =>
     });
 });
 
+app.MapPut("/api/tuberorders/{id}", (int id, int? tuberDriverId) =>
+{
+    TuberOrder order = tuberOrders.FirstOrDefault(o => o.Id == id);
+
+    if (order == null)
+    {
+        return Results.NotFound();
+    }
+
+    order.TuberDriverId = tuberDriverId;
+
+ 
+    return Results.Ok(new TuberOrderDTO
+    {
+        Id = order.Id,
+        OrderPlacedOnDate = order.OrderPlacedOnDate,
+        CustomerId = order.CustomerId,
+        TuberDriverId = order.TuberDriverId,
+        DeliveredOnDate = order.DeliveredOnDate,
+        Toppings = order.Toppings.Select(t => new ToppingDTO
+        {
+            Id = t.Id,
+            Name = t.Name
+        }).ToList()
+    });
+});
+
+
 
 
 
