@@ -66,19 +66,19 @@ List <Customer> customers = new List<Customer>()
     {
         Id = 3,
         Name = "Britney",
-        Address = "35 peaceful drive",
+        Address = "1492 Columbus Drive",
     },
      new Customer()
     {
         Id = 4,
         Name = "Bonnie",
-        Address = "35 peaceful drive",
+        Address = "79 Vesuvius Lane",
     },
      new Customer()
     {
         Id = 5,
-        Name = "Bonnie",
-        Address = "35 peaceful drive",
+        Name = "Hank",
+        Address = "61 Chaos Way",
     }
 };
 
@@ -116,25 +116,72 @@ List <TuberOrder> tuberOrders = new List<TuberOrder>()
     new TuberOrder()
     {
         Id = 1,
-        
-
+        CustomerId = 1,
+        TuberDriverId = 2
+    },
+        new TuberOrder()
+    {
+        Id = 2,
+        CustomerId = 4,
+        TuberDriverId = 1
+    },
+        new TuberOrder()
+    {
+        Id = 3,
+        CustomerId = 1,
+        TuberDriverId = 2
     }
 
-}
+};
 //add endpoints here
 app.MapGet("/api/tuberorders", () =>
 {
     return Results.Ok(
-        orders.Select(o => new TuberOrderDTO()
+        tuberOrders.Select(o => new TuberOrderDTO()
         {
-            Id = d.Id,
-            Name = d.Name,
-            CityId = d.CityId,
-            WalkerId = d.WalkerId
+            Id = o.Id,
+            OrderPlacedOnDate = o.OrderPlacedOnDate,
+            CustomerId = o.CustomerId,
+            TuberDriverId = o.TuberDriverId,
+            DeliveredOnDate = o.DeliveredOnDate,
+            Toppings = o.Toppings.Select(t => new ToppingDTO
+            {
+                Id = t.Id,
+                Name = t.Name
+            }). ToList()
         })
         .ToList()
     );
 
+});
+
+
+app.MapGet("/api/toppings", () =>
+{
+    return Results.Ok(
+        toppings.Select(t => new ToppingDTO()
+        {
+            Id = t.Id,
+            Name = t.Name,
+        })
+        .ToList()
+    );
+
+});
+
+
+app.MapGet("/api/toppings/{id}", (int id) => 
+{
+    Topping topping = toppings.FirstOrDefault( t => t.Id == id);
+
+    if(topping != null)
+    {
+        return Results.Ok(topping);
+    }
+    else
+    {
+        return Results.NotFound();
+    }
 });
 
 app.Run();
