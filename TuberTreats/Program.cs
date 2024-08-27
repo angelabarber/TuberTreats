@@ -183,6 +183,40 @@ app.MapGet("/api/tuberorders/{id}", (int id) =>
     );
 });
 
+app.MapPost("/api/tuberorders", (TuberOrderDTO newOrderDTO) =>
+{
+    TuberOrder newOrder = new TuberOrder
+    {
+        Id = tuberOrders.Count > 0 ? tuberOrders.Max(o => o.Id) + 1 : 1, 
+        OrderPlacedOnDate = DateTime.UtcNow, 
+        CustomerId = newOrderDTO.CustomerId,
+        TuberDriverId = newOrderDTO.TuberDriverId,
+        DeliveredOnDate = newOrderDTO.DeliveredOnDate,
+        Toppings = newOrderDTO.Toppings.Select(t => new ToppingDTO
+        {
+            Id = t.Id,
+            Name = t.Name
+        }).ToList()
+    };
+
+
+    tuberOrders.Add(newOrder);
+
+    return Results.Ok(new TuberOrderDTO
+    {
+        Id = newOrder.Id,
+        OrderPlacedOnDate = newOrder.OrderPlacedOnDate,
+        CustomerId = newOrder.CustomerId,
+        TuberDriverId = newOrder.TuberDriverId,
+        DeliveredOnDate = newOrder.DeliveredOnDate,
+        Toppings = newOrder.Toppings.Select(t => new ToppingDTO
+        {
+            Id = t.Id,
+            Name = t.Name
+        }).ToList()
+    });
+});
+
 
 
 
