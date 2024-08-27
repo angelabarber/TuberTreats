@@ -155,6 +155,36 @@ app.MapGet("/api/tuberorders", () =>
 
 });
 
+app.MapGet("/api/tuberorders/{id}", (int id) =>
+{
+    TuberOrder order = tuberOrders.FirstOrDefault(o => o.Id == id);
+
+    if (order == null)
+    {
+        return Results.NotFound();
+    }
+
+    return Results.Ok(
+        new TuberOrderDTO()
+        {
+            Id = order.Id,
+            OrderPlacedOnDate = order.OrderPlacedOnDate,
+            CustomerId = order.CustomerId,
+            TuberDriverId = order.TuberDriverId,
+            DeliveredOnDate = order.DeliveredOnDate,
+            Toppings = order.Toppings
+                .Select(t => new ToppingDTO()
+                {
+                    Id = t.Id,
+                    Name = t.Name
+                })
+                .ToList()
+        }
+    );
+});
+
+
+
 
 app.MapGet("/api/toppings", () =>
 {
