@@ -276,6 +276,25 @@ app.MapGet("/api/toppings/{id}", (int id) =>
     }
 });
 
+// app.MapGet("/api/customers", () =>
+// {
+//     return Results.Ok(
+//         customers.Select(c => new CustomerDTO()
+//         {
+//             Id = c.Id,
+//             Name = c.Name,
+//             Address = c.Address,
+//             TuberOrders = c.TuberOrders.Select(t => new TuberOrderDTO
+//             {
+//                 Id = t.Id,
+
+//             }). ToList()
+//         })
+//         .ToList()
+//     );
+
+// });
+
 app.Run();
 //don't touch or move this!
 public partial class Program { }
